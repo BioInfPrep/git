@@ -24,7 +24,7 @@
 \usepackage{verbatim}
 \usetikzlibrary{arrows,shapes}
 \usepackage[absolute,overlay]{textpos}
-\usepackage{minted}
+\usepackage[cache=false]{minted}
 \usepackage{pdfcomment}
 \captionsetup{compatibility=false}
 \usepackage{url}
@@ -59,9 +59,9 @@
 
 \begin{document}
 
-\author{Oliver Alka\textsuperscript{1}, Simone Lederer\textsuperscript{2}}
+\author{Pascal Escher\textsuperscript{1}, Philipp Thiel\textsuperscript{2}}
 \title[Git]{Version Control with Git}
-\institute[ABI]{1 Applied Bioinformatics, University of Tübingen\\2 Translational Bioinformatics, University of Tübingen\\}
+\institute[ABI]{1 Applied Bioinformatics, University of Tübingen\\2 Interfaculty Institute for Biomedical Informatics, University of Tübingen\\}
 \date{April 08\textsuperscript{th}, 2021}
 \setbeamertemplate{footline}[page number]{}
 
@@ -71,7 +71,7 @@
 \frametitle{Most important help}
 \begin{center}
 
-	\includegraphics[scale=0.18]{google_classic.jpg}
+	\includegraphics[scale=0.18]{assets/google_classic.jpg}
 
 	... btw ...  do you know this awesome service? \\
 	... \url{https://lmgtfy.com}
@@ -90,8 +90,9 @@ can read in the meantime:
 \begin{itemize}
     \setlength\itemsep{1em}
 	\item About Git: \\ \url{http://tom.preston-werner.com/2009/05/19/the-git-parable.html}
-    \item Dilbert: \\ \url{http://dilbert.com}
-    \item PhDomics: \\ \url{http://www.phdomics.com}
+	\item Microsoft and GitHub: \\ \url{https://medium.com/@ow/microsoft-acquiring-github-is-a-good-thing-heres-why-6a6a57eb83ac}
+    \item Dilbert: \url{http://dilbert.com}
+    \item PhdComics: \url{http://www.phdComics.com}
 \end{itemize}
 \end{frame}
 
@@ -105,9 +106,10 @@ can read in the meantime:
     
 	\begin{itemize}
     	\setlength\itemsep{0.4em}
-		\item CVS
-        \item Subversion
+		\item Subversion (SVN)
         \item Mercurial
+        \item Perforce 
+        \item Deprecated: Concurrent Versions System (CVS)
         \item \href{https://en.wikipedia.org/wiki/List_of_version_control_software}{https://en.wikipedia.org/wiki/List\_of\_version\_control\_software} 
 	\end{itemize}
     
@@ -117,12 +119,36 @@ can read in the meantime:
 \end{frame}
 
 \begin{frame}[t]
+\frametitle{Git: Inventor}
+\begin{center}
+	
+	\includegraphics[scale=0.10]{assets/Linus-Torvalds-2012.jpg}
+	
+	One of the founder of Linux and Git: Linus Torvalds\\
+	Source: \url{https://cdn.britannica.com/}
+	
+\end{center}
+\end{frame}
+
+\begin{frame}[t]
+\frametitle{Git: Github}
+	\begin{center}
+		
+		\includegraphics[scale=0.75]{assets/Microsoftbiggestdeals.png}
+		
+		Microsoft bought GitHub in 2018 for 7,5 billion \$\\
+		Source: \url{https://www.geekwire.com/2018/heres-microsofts-github-acquisition-ranks-among-tech-giants-largest-deals/}
+		
+	\end{center}
+\end{frame}
+
+\begin{frame}[t]
 \frametitle{Git: Important Resources}
 \begin{itemize}
     \setlength\itemsep{1em}
-	\item The docu \newline https://git-scm.com \newline
-    \item A nice tutorial \newline https://try.github.io/levels/1/challenges/1 \newline
-    \item Maybe to be read first \newline http://tom.preston-werner.com/2009/05/19/the-git-parable.html \newline
+	\item The docu and installer \newline \url{https://git-scm.com} \newline
+    \item A nice tutorial \newline \url{https://try.github.io/levels/1/challenges/1} \newline
+    \item Maybe to be read first \newline \url{http://tom.preston-werner.com/2009/05/19/the-git-parable.html} \newline
 \end{itemize}
 \end{frame}
 
@@ -130,11 +156,15 @@ can read in the meantime:
 \frametitle{Git \& Software Projects}
 \begin{figure}
     \begin{center}
-    	\includegraphics[width=0.7\textwidth]{OpenMS.png}
+    	\includegraphics[width=0.7\textwidth]{assets/OpenMS.png}
     \end{center}
 \end{figure} 
-
-Version Control is indispensable for bigger software projects were a lot of developers are working together (e.g. https://github.com/OpenMS/OpenMS), but also helps with versioning in smaller projects/applications/scripts. Use it! 
+\begin{itemize}
+    \setlength\itemsep{1em}
+	\item Version Control is indispensable for bigger software projects with lots of developers, 
+	e.g. https://github.com/OpenMS/OpenMS
+    \item Useful for smaller projects/application/scripts as well! \newline
+\end{itemize}
 \end{frame}
 
 \begin{frame}[t]
@@ -142,7 +172,7 @@ Version Control is indispensable for bigger software projects were a lot of deve
 You can depict a local repository by three trees. The first one is the working directory, which holds the files. The second is an index which is used as staging area. The last one is head, which points to your last commit. Git saves the changes you make and stores it in the index/head based on adding and commit the changes.
 \begin{figure}
     \begin{center}
-    	\includegraphics[width=\textwidth]{git.jpg}
+    	\includegraphics[width=\textwidth]{assets/git.jpg}
     \end{center}
 \end{figure}
 \end{frame}
@@ -184,7 +214,7 @@ Prerequisites:
 \item Install git \url{https://git-scm.com/book/en/v2/Getting-Started-Installing-Git}
 \item Note: You can use the VirtualBox Image (Linux course) - if you like. 
 \item Create a new empty directory and change into it.
-\item Note: If you run into a problem when using git, please read the info/error message in the terminal carefully - usually it is self explaining. If you get stuck - give google a chance. If nothing helps, please shoot me an email! 
+\item Note: If you run into a problem when using git, please read the info/error message in the terminal carefully - usually it is self explaining. If you get stuck - give google a chance. If nothing helps, don't hesitate to ask! 
 \end{itemize}
 \end{frame}
 
@@ -212,7 +242,7 @@ try to solve the given tasks.
 \begin{itemize}
     \setlength\itemsep{1em}
 	\item Create a new empty repository
-    \item Play around in the directory
+    \item Play around in the directory, e.g. create a new folder
     \item Check the git status
 \end{itemize}
 
@@ -343,11 +373,11 @@ try to solve the given tasks.
 
 \begin{itemize}
     \setlength\itemsep{1em}
-	\item Purpose: Get a copy of a our work project in your GitHub account (peek at Task2)
-    \item To do this we fork the repository (repo) of interest.
+	\item Purpose: Get a copy of our work project in your GitHub account (peek at Task2)
+    \item To do this we fork the repository (repo) of interest
     \item Go the the online repository and use the fork button. Now you have a fork and can edit it as you like! \begin{figure}
     \begin{center}
-    	\includegraphics[width=0.7\textwidth]{fork.png}
+    	\includegraphics[width=0.7\textwidth]{assets/fork.png}
     \end{center}
 \end{figure}   
 \end{itemize}
@@ -410,6 +440,37 @@ try to solve the given tasks.
 \end{frame}
 
 \begin{frame}[t, fragile]
+	\frametitle{Git: Important Commands}
+	
+	\begin{minted}[mathescape, numbersep=5pt, frame=lines]{latex} 
+ $ git config --global user.name "Your Name"
+	\end{minted}
+	
+	\begin{itemize}
+		\setlength\itemsep{1em}
+		\item Change/Add your name so everyone can distinguish the involved developers	
+	\end{itemize}
+
+	\begin{minted}[mathescape, numbersep=5pt, frame=lines]{latex} 
+ $ git config --global user.email "name@domain.com"
+\end{minted}
+
+	\begin{itemize}
+	\setlength\itemsep{1em}
+	\item Add your email address so people can get in contact with you
+\end{itemize}
+
+	\begin{minted}[mathescape, numbersep=5pt, frame=lines]{latex} 
+ $ git config --list
+\end{minted}
+
+\begin{itemize}
+	\setlength\itemsep{1em}
+	\item Check your credentials
+\end{itemize}
+\end{frame}
+
+\begin{frame}[t, fragile]
 \frametitle{Git: Important Commands}
 
 \begin{minted}[mathescape, numbersep=5pt, frame=lines]{latex} 
@@ -432,8 +493,16 @@ try to solve the given tasks.
 \begin{itemize}
 	\item Lists all known remote repos
 \end{itemize}
-\end{frame}
 
+\begin{minted}[mathescape, numbersep=5pt, frame=lines]{latex}
+ $ git remote set-url origin 
+ git@github.com:githubusername/repository.git
+\end{minted}
+
+\begin{itemize}
+	\item Change the remote of origin to given account and remote repository
+\end{itemize}
+\end{frame}
 
 
 \begin{frame}[t, fragile]
@@ -479,8 +548,6 @@ try to solve the given tasks.
 
 \end{frame}
 
-
-
 \begin{frame}[t, fragile]
 \frametitle{Git: Task Set 2}
 
@@ -500,7 +567,7 @@ try to solve the given tasks.
 \frametitle{Git: Important Things Most Likely Omitted}
 
 \begin{itemize}
-    \item Branching - Why is branching so powerful, and how is it used? \\
+    \item Branching - Why is branching so powerful and how is it used? \\
     Please check: \\
     \url{https://nvie.com/posts/a-successful-git-branching-model} \\
     \url{https://guides.github.com/introduction/flow/}
@@ -515,14 +582,14 @@ try to solve the given tasks.
 \frametitle{Mergeconflicts : TaskSet 3}
 \begin{itemize}
 \item Fork \url{https://github.com/klarareichard/vorkurs_merging}
-\item Clone your Fork.
+\item Clone your Fork
 \item Create new branch modification \begin{minted}[mathescape, numbersep=5pt, frame=lines]{latex} 
  $ git checkout -b modification
 \end{minted}
-\item insert "Hello World" as first line into mergeconflict.txt, change second line to "This line won't cause a mergeconflict anymore". Add an additional line: "This is an additional line" to the end of the file.
-\item add and commit your changes
-\item switch to branch master 
-\item create another branch other-modification and switch to it
+\item Insert "Hello World" as first line into mergeconflict.txt, change second line to "This line won't cause a mergeconflict anymore". Add an additional line: "This is an additional line" to the end of the file.
+\item Add and commit your changes
+\item Switch to branch master 
+\item Create another branch other-modification and switch to it
 \end{itemize}
 \end{frame}
 
@@ -537,11 +604,25 @@ try to solve the given tasks.
  \item \begin{minted}[mathescape, numbersep=5pt, frame=lines]{latex} 
  $ git merge other-modification
  \end{minted}
- \item open mergeconflict.txt and resolve mergeconflict. Commit the result.
- \item show branches and commits as a graph \begin{minted}[mathescape, numbersep=5pt, frame=lines]{latex}
+ \item Open mergeconflict.txt and resolve mergeconflict. Commit the result.
+ \item Show branches and commits as a graph \begin{minted}[mathescape, numbersep=5pt, frame=lines]{latex}
  $ git log --graph --oneline --all
  \end{minted}
 \end{itemize}
+\end{frame}
+
+\begin{frame}[t, fragile]
+	\frametitle{Git: Merging with IDEs}
+	\begin{center}
+		
+		\includegraphics[scale=0.3]{assets/visualstudiocode-merging.png}
+		
+	\end{center}
+	\begin{itemize}
+		\item Hint: Use IDEs for Merging: Visual Studio Code! \\
+		Source: \url{https://code.visualstudio.com/docs/getstarted/tips-and-tricks#_resolve-merge-conflicts}
+		
+	\end{itemize}
 \end{frame}
 
 
@@ -549,7 +630,7 @@ try to solve the given tasks.
 \frametitle{Thank you}
 
 \begin{center}
-	\includegraphics[scale=0.45]{Change-management-humor.png}
+	\includegraphics[scale=0.45]{assets/Change-management-humor.png}
 \end{center}
 
 \end{frame}
@@ -557,14 +638,15 @@ try to solve the given tasks.
 \begin{frame}
 \frametitle{Acknowledgements}
 
-Original version of the Git Vorkus was kindly provided by 
+Original version of the Git Vorkurs was kindly provided by 
 Lukas Zimmermann. \\
 
-Thanks to all presenters:
+Thanks to all constributors:
 \begin{itemize}
 \item Lukas Zimmermann
 \item Oliver Alka 
 \item Simone Lederer
+\item Pascal Escher
 \end{itemize}
 
 
